@@ -1,0 +1,61 @@
+﻿@model FirstIslandBankCorporation.Models.UserTransactionsModel
+@{
+    ViewBag.Title = "Mini Statement";
+    var accountBalance = ViewBag.accountBalance;
+}
+
+<style>
+    table, th, td {
+        padding: 15px;
+        text-align: left;
+        font-family: Arial;
+        font-size: 16px;
+    }
+    .button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 2px 3px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+</style>
+
+<div class="jumbotron">
+    <h3>Mini Statement</h3>
+    <h5><b>Current Balance. - Rs. @accountBalance.ToString("0.00")</b></h5>
+    <h5><b>@Model.AccountNumber - @Model.AccountType</b></h5>
+    <div>
+        @if (Model.UserTransactions.Count > 0)
+        {
+        <div><a id="exporttoexcel" class="button" href="@Url.Action("ExportData","MiniStatement",new { userId = 1, accountNumber = Model.AccountNumber })">Export to Excel</a></div>
+        <div>
+            <table border="1" cellpadding="0" cellspacing="2">
+                <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Type</th>
+                </tr>
+                @foreach (DataObject.UserTransactionsData userTrans in Model.UserTransactions)
+                {
+                <tr>
+                    <td>@userTrans.TransactionDate.ToString("dd/MM/yyyy")</td>
+                    <td>@userTrans.Description</td>
+                    <td>@userTrans.Amount.ToString()</td>
+                    <td>@userTrans.TransactionType</td>
+                </tr>
+                }
+            </table>
+        </div>
+        }
+        else
+        {
+        <div> No Transactions </div>
+        }
+    </div>
+</div>

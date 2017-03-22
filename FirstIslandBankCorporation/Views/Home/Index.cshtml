@@ -1,0 +1,50 @@
+﻿@using FirstIslandBankCorporation.Models
+@model MiniStatementModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h3>Accounts</h3>
+    <h5><b>Total Available Balance.</b></h5>
+    <h5><b>Rs. @Model.TotalAvaialbeBalance.ToString("0.00")</b></h5>
+
+    @{
+        if (Model.HasSavingsAccount)
+        {
+        <h6><b>Savings Account </b></h6>
+            if (Model.SavingAccountTransactionCount > 0)
+            {
+            <h6>@Model.SavingsAccountNumber&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.@Model.SavingAccountBalance.ToString("0.00")&nbsp;&nbsp;&nbsp;&nbsp;<a id="1" href="@Url.Action("ViewMiniStatement", "MiniStatement", new { userId = Model.UserId, accountId = 1 })">View Mini Statement </a></h6>
+            }
+            else
+            {
+            <h6>@Model.SavingsAccountNumber&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.@Model.SavingAccountBalance.ToString("0.00")&nbsp;&nbsp;&nbsp;&nbsp;No Transactions</h6>
+            }
+        }
+        if (Model.HasCurrentAccount)
+        {
+        <h6><b>Current Account </b></h6>
+            if (Model.CurrentAccountTransactionCount > 0)
+            {
+            <h6>@Model.CurrentAccountNumber&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.@Model.CurrentAccountBalance.ToString("0.00")&nbsp;&nbsp;&nbsp;&nbsp;<a id="2" href="@Url.Action("ViewMiniStatement", "MiniStatement", new { userId = Model.UserId, accountId = 2 })">View Mini Statement </a></h6>
+            }
+            else
+            {
+            <h6>@Model.CurrentAccountNumber&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.@Model.CurrentAccountBalance.ToString("0.00")&nbsp;&nbsp;&nbsp;&nbsp;No Transactions</h6>
+            }
+        }
+        if (Model.HasSeniorCitizenAccount)
+        {
+        <h6><b> Senior Citizen Account </b></h6>
+            if (Model.SeniorCitizenTransactionCount > 0)
+            {
+            <h6>@Model.SeniorCitizenAccountNumber&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.@Model.SeniorCitizenAccountBalance.ToString("0.00")&nbsp;&nbsp;&nbsp;&nbsp;<a id="3" href="@Url.Action("ViewMiniStatement", "MiniStatement", new { userId = Model.UserId, accountId = 3 })">View Mini Statement </a></h6>
+            }
+            else
+            {
+            <h6>@Model.SeniorCitizenAccountNumber&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.@Model.SeniorCitizenAccountBalance.ToString("0.00")&nbsp;&nbsp;&nbsp;&nbsp;No Transactions</h6>
+            }
+        }
+    }
+</div>
